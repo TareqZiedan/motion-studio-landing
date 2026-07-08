@@ -19,8 +19,4 @@
   <rect width="1600" height="1000" rx="0" fill="url(#g1)"/>
   <rect width="1600" height="1000" rx="0" fill="url(#b1)"/>
   <rect width="1600" height="1000" rx="0" fill="#07070c" opacity="0.18"/>
-  <g font-family="Arial, sans-serif" text-anchor="middle">
-    <text x="800" y="488" font-size="70" font-weight="700" fill="#ffffff" opacity="0.92">Kaleido Studio</text>
-    <text x="800" y="530" font-size="35" fill="#ffffff" opacity="0.7">Brand & Web Design</text>
-  </g>
 </svg>

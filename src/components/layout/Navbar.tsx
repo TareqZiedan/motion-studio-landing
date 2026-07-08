@@ -115,7 +115,7 @@ export default function Navbar() {
             {link.label}
           </Link>
         ))}
-        <div data-mobile-link>
+        <div data-mobile-link onClick={() => setOpen(false)}>
           <GradientButton href="#contact">Start a Project</GradientButton>
         </div>
       </div>
