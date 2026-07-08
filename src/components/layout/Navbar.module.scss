@@ -1,0 +1,36 @@
+@use "../../styles/mixins" as m;
+@use "../../styles/variables" as v;
+
+.navbar {
+  transition:
+    background-color 0.4s v.$ease-out-expo,
+    backdrop-filter 0.4s v.$ease-out-expo,
+    border-color 0.4s v.$ease-out-expo;
+}
+
+.navbar:global(.scrolled) {
+  @include m.glass;
+}
+
+.mobilePanel {
+  @include m.glass;
+}
+
+.link {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background-image: v.$gradient-brand;
+    transition: width 0.3s v.$ease-out-expo;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}

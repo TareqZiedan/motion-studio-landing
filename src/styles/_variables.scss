@@ -1,0 +1,18 @@
+$color-bg: #07070c;
+$color-bg-elevated: #111018;
+$color-bg-soft: #15141f;
+$color-border: rgba(255, 255, 255, 0.09);
+
+$color-primary: #8b5cf6;
+$color-secondary: #ec4899;
+$color-accent: #22d3ee;
+
+$gradient-brand: linear-gradient(120deg, $color-primary, $color-secondary 55%, $color-accent);
+$gradient-brand-soft: linear-gradient(
+  120deg,
+  rgba(139, 92, 246, 0.35),
+  rgba(236, 72, 153, 0.35) 55%,
+  rgba(34, 211, 238, 0.35)
+);
+
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);

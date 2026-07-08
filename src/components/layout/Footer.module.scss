@@ -1,0 +1,38 @@
+@use "../../styles/mixins" as m;
+@use "../../styles/variables" as v;
+
+.footer {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid v.$color-border;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    width: 60rem;
+    height: 30rem;
+    transform: translateX(-50%);
+    background: v.$gradient-brand-soft;
+    filter: blur(120px);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.newsletterInput {
+  @include m.glass;
+  border-radius: 999px;
+}
+
+.social {
+  @include m.glass;
+  border-radius: 999px;
+  transition: transform 0.3s v.$ease-out-expo, border-color 0.3s;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: v.$color-primary;
+  }
+}

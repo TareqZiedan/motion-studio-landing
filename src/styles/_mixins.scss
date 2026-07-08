@@ -1,0 +1,18 @@
+@use "./variables" as v;
+
+@mixin gradient-text {
+  background-image: v.$gradient-brand;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@mixin glass {
+  background: color-mix(in srgb, v.$color-bg-elevated 70%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid v.$color-border;
+}
+
+@mixin blob-shape {
+  border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
+}

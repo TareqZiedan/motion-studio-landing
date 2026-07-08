@@ -1,0 +1,71 @@
+@use "../../styles/mixins" as m;
+@use "../../styles/variables" as v;
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  filter: blur(90px);
+  opacity: 0.55;
+  @include m.blob-shape;
+  animation: float 16s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.blobOne {
+  top: -12%;
+  left: -12%;
+  width: 32rem;
+  height: 32rem;
+  background: v.$color-primary;
+}
+
+.blobTwo {
+  bottom: -18%;
+  right: -10%;
+  width: 28rem;
+  height: 28rem;
+  background: v.$color-secondary;
+  animation-delay: -5s;
+}
+
+.blobThree {
+  top: 25%;
+  right: 12%;
+  width: 18rem;
+  height: 18rem;
+  background: v.$color-accent;
+  animation-delay: -9s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(4%, 6%) scale(1.08);
+  }
+  66% {
+    transform: translate(-4%, -3%) scale(0.95);
+  }
+}
+
+.scrollCue {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+}
