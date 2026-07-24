@@ -2,7 +2,7 @@
 
 A single-page marketing site for a (fictional) web-design & development studio, built as a front-end and scroll-animation showcase.
 
-**[Live demo](https://bsc-nine-sigma.vercel.app)** · **[Report a bug](https://github.com/TareqZiedan/motion-studio-landing/issues)**
+**[Live demo](https://motion-studio-landing-t-dev.vercel.app/)** · **[Report a bug](https://github.com/TareqZiedan/motion-studio-landing/issues)**
 
 ![Project screenshot](./docs/screenshot.png)
 
