@@ -2,7 +2,7 @@
 
 A single-page marketing site for a (fictional) web-design & development studio, built as a front-end and scroll-animation showcase.
 
-**[Live demo](https://bsc-nine-sigma.vercel.app)** · **[Report a bug](https://github.com/TareqZiedan/bsc/issues)**
+**[Live demo](https://bsc-nine-sigma.vercel.app)** · **[Report a bug](https://github.com/TareqZiedan/motion-studio-landing/issues)**
 
 ![Project screenshot](./docs/screenshot.png)
 
@@ -44,8 +44,8 @@ BSC is a static, single-page studio landing site — hero, services, portfolio, 
 **Requirements:** Node 20.9+ (see `engines` in package.json), npm
 
 ```bash
-git clone https://github.com/TareqZiedan/bsc.git
-cd bsc
+git clone https://github.com/TareqZiedan/motion-studio-landing.git
+cd motion-studio-landing
 npm install
 npm run dev
 ```
