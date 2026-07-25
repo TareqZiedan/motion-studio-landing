@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="BSC">
+  <defs>
+    <linearGradient id="brand" gradientUnits="userSpaceOnUse" x1="-3.3" y1="5.7" x2="39.3" y2="30.3">
+      <stop offset="0" stop-color="#8b5cf6" />
+      <stop offset="0.55" stop-color="#ec4899" />
+      <stop offset="1" stop-color="#22d3ee" />
+    </linearGradient>
+  </defs>
+  <rect width="36" height="36" rx="12" fill="url(#brand)" />
+  <text x="18" y="18" text-anchor="middle" dominant-baseline="central"
+        font-family="'Space Grotesk', ui-sans-serif, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#ffffff">BS</text>
+</svg>
