@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { projects } from "@/data/content";
 
@@ -15,6 +15,13 @@ export default function Project() {
     () => {
       if (!gridRef.current) return;
       const cards = gridRef.current.querySelectorAll("[data-card]");
+
+      // Cards start hidden via CSS (opacity-0 translate-y-10). Under reduced
+      // motion, reveal them immediately instead of on scroll.
+      if (prefersReducedMotion()) {
+        gsap.set(cards, { opacity: 1, y: 0 });
+        return;
+      }
 
       ScrollTrigger.batch(cards, {
         start: "top 85%",

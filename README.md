@@ -13,6 +13,39 @@ BSC is a static, single-page studio landing site — hero, services, portfolio, 
 
 ---
 
+## Accessibility
+
+Accessibility is treated as part of "done" here, not a later pass — and on a
+motion-first site the headline concern is respecting reduced motion. Concretely:
+
+- **Reduced motion is respected site-wide.** Every GSAP animation is gated behind a
+  `prefersReducedMotion()` check (`src/lib/gsap.ts`). Under
+  `prefers-reduced-motion: reduce`, reveal / parallax / marquee / count-up animations
+  don't run and content renders in its final, visible state — with the tricky cases
+  handled explicitly: the pinned scroll-scrub **showcase becomes a plain vertical stack**
+  (so every project stays reachable), the **stat counters show their final value**
+  instead of "0", and the mobile menu opens and closes instantly. A CSS
+  `@media (prefers-reduced-motion: reduce)` block neutralizes the remaining SCSS-driven
+  effects and smooth scrolling (`src/app/globals.css`).
+- **A skip link.** A "Skip to main content" link is the first focusable element;
+  visually hidden until focused, it jumps past the navbar to `<main id="main-content">`
+  (`src/app/layout.tsx`).
+- **Semantic landmarks.** A `<header>` banner (the navbar) containing a labelled
+  `<nav aria-label="Main navigation">`, a single focusable `<main id="main-content">`,
+  and a `<footer>`.
+- **Labelled controls.** The mobile-menu toggle, the testimonial prev/next and dot
+  controls, the footer social links and the newsletter subscribe button all carry
+  descriptive `aria-label`s.
+- **Meaningful image alternatives.** Content images (team, workspace, project
+  thumbnails, avatars) have descriptive `alt` text; purely decorative background art
+  uses `alt=""` so screen readers skip it.
+
+Verified with a Chromium pass in both modes: the keyboard skip link works, and under
+reduced motion no section is left hidden, counters show their final values, and every
+showcase panel is visible.
+
+---
+
 ## Tech stack
 
 | Layer | Choice | Why |
@@ -36,6 +69,7 @@ BSC is a static, single-page studio landing site — hero, services, portfolio, 
 - **Testimonials with star ratings** — client quotes with per-testimonial star ratings.
 - **Team grid & marquee** — meet the team, plus a continuously scrolling keyword marquee.
 - **Responsive nav with animated mobile menu** — sticky navbar that restyles on scroll, and a full-screen clip-path "circle reveal" menu on mobile.
+- **Reduced-motion aware** — every animation is gated on `prefers-reduced-motion`, so reduced-motion users get a still, fully readable page (see [Accessibility](#accessibility)).
 
 ---
 
@@ -77,7 +111,7 @@ src/
 │   ├── sections/         # Page sections: Hero, About, Showcase, Service, Testimonial, Team, …
 │   └── ui/               # Reusable bits: Counter, Marquee, StarRating, GradientButton, SectionHeading
 ├── hooks/                # useScrollReveal — shared GSAP scroll-reveal hook
-├── lib/                  # gsap.ts — client-only GSAP plugin registration
+├── lib/                  # gsap.ts — client-only GSAP registration + prefersReducedMotion()
 ├── data/                 # content.ts — all site copy/data as typed constants
 └── styles/               # _variables.scss, _mixins.scss — shared Sass
 public/

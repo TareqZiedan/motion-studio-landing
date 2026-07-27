@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 const stats = [
@@ -19,6 +19,8 @@ export default function About() {
   useGSAP(
     () => {
       if (!imageRef.current) return;
+      // Reduced motion: skip the reveal; image and content stay in place.
+      if (prefersReducedMotion()) return;
 
       gsap.fromTo(
         imageRef.current,

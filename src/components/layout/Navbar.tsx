@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import { navLinks } from "@/data/content";
 import GradientButton from "@/components/ui/GradientButton";
 import styles from "./Navbar.module.scss";
@@ -30,19 +30,29 @@ export default function Navbar() {
     () => {
       const panel = panelRef.current;
       if (!panel) return;
+      const reduce = prefersReducedMotion();
 
       if (open) {
         gsap.set(panel, { display: "flex" });
-        gsap.fromTo(
-          panel,
-          { clipPath: "circle(0% at 100% 0%)" },
-          { clipPath: "circle(150% at 100% 0%)", duration: 0.7, ease: "power3.inOut" },
-        );
-        gsap.fromTo(
-          panel.querySelectorAll("[data-mobile-link]"),
-          { y: 24, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, delay: 0.25, ease: "power3.out" },
-        );
+        if (reduce) {
+          // Reduced motion: reveal the menu instantly, no clip-path wipe or slide.
+          gsap.set(panel, { clipPath: "none" });
+          gsap.set(panel.querySelectorAll("[data-mobile-link]"), { y: 0, opacity: 1 });
+        } else {
+          gsap.fromTo(
+            panel,
+            { clipPath: "circle(0% at 100% 0%)" },
+            { clipPath: "circle(150% at 100% 0%)", duration: 0.7, ease: "power3.inOut" },
+          );
+          gsap.fromTo(
+            panel.querySelectorAll("[data-mobile-link]"),
+            { y: 24, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, delay: 0.25, ease: "power3.out" },
+          );
+        }
+      } else if (reduce) {
+        // Reduced motion: hide instantly, no reverse wipe.
+        gsap.set(panel, { display: "none" });
       } else {
         gsap.to(panel, {
           clipPath: "circle(0% at 100% 0%)",
@@ -68,7 +78,7 @@ export default function Navbar() {
           <span>BSC</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Main navigation" className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}

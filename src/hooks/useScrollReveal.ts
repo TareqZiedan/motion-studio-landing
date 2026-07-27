@@ -2,7 +2,7 @@
 
 import { useRef, type RefObject } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 type Options = {
   y?: number;
@@ -20,6 +20,8 @@ export function useScrollReveal<T extends HTMLElement>(options: Options = {}): R
       if (!ref.current) return;
       const targets = ref.current.querySelectorAll(selector);
       if (!targets.length) return;
+      // Reduced motion: leave targets in their natural, visible state.
+      if (prefersReducedMotion()) return;
 
       gsap.fromTo(
         targets,

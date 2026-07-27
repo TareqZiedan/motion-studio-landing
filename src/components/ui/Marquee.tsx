@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 type Props = {
   words: string[];
@@ -17,6 +17,8 @@ export default function Marquee({ words, speed = 60, className = "" }: Props) {
     () => {
       if (!trackRef.current) return;
       const track = trackRef.current;
+      // Reduced motion: no infinite scroll; the words rest in place.
+      if (prefersReducedMotion()) return;
       const totalWidth = track.scrollWidth / 2;
 
       const tween = gsap.to(track, {

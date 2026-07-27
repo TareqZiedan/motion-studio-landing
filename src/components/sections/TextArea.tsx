@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, SplitText } from "@/lib/gsap";
+import { gsap, SplitText, prefersReducedMotion } from "@/lib/gsap";
 import Marquee from "@/components/ui/Marquee";
 import { marqueeWords } from "@/data/content";
 
@@ -14,6 +14,8 @@ export default function TextArea() {
   useGSAP(
     () => {
       if (!paragraphRef.current || !pinRef.current) return;
+      // Reduced motion: no pin/scrub; the paragraph shows fully, no dimming.
+      if (prefersReducedMotion()) return;
 
       const split = new SplitText(paragraphRef.current, { type: "words" });
       gsap.set(split.words, { opacity: 0.12 });

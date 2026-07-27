@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import StarRating from "@/components/ui/StarRating";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { testimonials } from "@/data/content";
@@ -21,6 +21,8 @@ export default function Testimonial() {
   useGSAP(
     () => {
       if (!cardRef.current) return;
+      // Reduced motion: no blur/slide entrance; the card swaps in instantly.
+      if (prefersReducedMotion()) return;
       gsap.fromTo(
         cardRef.current,
         { opacity: 0, y: 24, filter: "blur(6px)" },

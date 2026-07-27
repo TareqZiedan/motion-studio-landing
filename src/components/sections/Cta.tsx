@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import GradientButton from "@/components/ui/GradientButton";
 
 export default function Cta() {
@@ -11,6 +11,9 @@ export default function Cta() {
 
   useGSAP(
     () => {
+      // Reduced motion: skip the floating loop and reveal; content stays visible.
+      if (prefersReducedMotion()) return;
+
       gsap.to("[data-float]", {
         y: -20,
         duration: 3.5,

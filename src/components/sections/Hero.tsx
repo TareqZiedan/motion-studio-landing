@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
-import { gsap, SplitText } from "@/lib/gsap";
+import { gsap, SplitText, prefersReducedMotion } from "@/lib/gsap";
 import GradientButton from "@/components/ui/GradientButton";
 import styles from "./Hero.module.scss";
 
@@ -15,6 +15,8 @@ export default function Hero() {
   useGSAP(
     () => {
       if (!headingRef.current) return;
+      // Reduced motion: skip the split/timeline/parallax; content stays visible.
+      if (prefersReducedMotion()) return;
 
       const split = new SplitText(headingRef.current, {
         type: "lines,words",

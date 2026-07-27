@@ -82,3 +82,23 @@ body {
   background: linear-gradient(var(--color-primary), var(--color-accent));
   border-radius: 999px;
 }
+
+/*
+ * Reduced motion: neutralize CSS-driven animation/transition and smooth scroll.
+ * GSAP animations are gated separately in JS (see prefersReducedMotion in
+ * src/lib/gsap.ts); this covers the SCSS-module effects (hero blobs, scroll
+ * cue) and any transitions.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { featuredProjects } from "@/data/content";
 
@@ -16,6 +16,21 @@ export default function Showcase() {
     () => {
       const panels = panelsRef.current;
       if (!panels.length || !pinRef.current) return;
+
+      // Reduced motion: don't pin/scrub through stacked panels (which would hide
+      // all but one). Lay them out as a plain, scrollable vertical stack so every
+      // project stays visible and reachable.
+      if (prefersReducedMotion()) {
+        gsap.set(pinRef.current, { height: "auto", overflow: "visible" });
+        panels.forEach((panel, i) => {
+          gsap.set(panel, {
+            position: "relative",
+            height: "70vh",
+            marginBottom: i < panels.length - 1 ? "1.5rem" : 0,
+          });
+        });
+        return;
+      }
 
       gsap.set(panels, { yPercent: (i) => (i === 0 ? 0 : 100) });
 

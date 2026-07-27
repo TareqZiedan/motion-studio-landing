@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { processSteps } from "@/data/content";
 
@@ -13,6 +13,9 @@ export default function AboutSecondary() {
 
   useGSAP(
     () => {
+      // Reduced motion: skip the path-draw and step reveals; all shown in place.
+      if (prefersReducedMotion()) return;
+
       if (pathRef.current) {
         const length = pathRef.current.getTotalLength();
         gsap.set(pathRef.current, { strokeDasharray: length, strokeDashoffset: length });
