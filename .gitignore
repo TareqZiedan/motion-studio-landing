@@ -42,3 +42,9 @@ next-env.d.ts
 
 # readme backup
 README.old.md
+
+# editor & OS
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
