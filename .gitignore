@@ -48,3 +48,8 @@ Thumbs.db
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# AI tooling (loaded locally, not published)
+CLAUDE.md
+AGENTS.md
+.claude/
